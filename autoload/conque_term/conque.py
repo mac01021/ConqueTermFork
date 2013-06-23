@@ -394,21 +394,21 @@ class Conque:
         # stop here if cursor doesn't need to be moved
         if self.cursor_set:
             return
+        else:
+            # otherwise
+            # check if window size has changed
+            if not CONQUE_FAST_MODE:
+                self.update_window_size()
+                logging.info('window size!')
+            # set cursor position
+            try:
+                self.set_cursor(self.l, self.c)
+            except:
+                logging.info('cursor set error')
+                logging.info(traceback.format_exc())
+                pass
 
-        # check if window size has changed
-        if not CONQUE_FAST_MODE:
-            self.update_window_size()
-            logging.info('window size!')
-
-        # otherwise set cursor position
-        try:
-            self.set_cursor(self.l, self.c)
-        except:
-            logging.info('cursor set error')
-            logging.info(traceback.format_exc())
-            pass
-
-        self.cursor_set = True
+            self.cursor_set = True
 
 
     def plain_text(self, input):

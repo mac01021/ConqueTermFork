@@ -1217,6 +1217,24 @@ endfunction " }}}
 
 " {{{
 
+
+" send text from user input prompt
+function! conque_term#send_input() "{{{
+    " get most recent/relevant terminal
+    let term = conque_term#get_instance()
+    "get a line from the user
+    let inp_val = input("@")
+    " go to terminal buffer
+    call term.focus()
+    " execute the line
+    call term.write(inp_val."\r")
+    " scroll buffer left
+    startinsert!
+    normal! 0zH
+endfunction "}}}
+
+
+
 " send selected text from another buffer
 function! conque_term#send_selected(type) "{{{
 
